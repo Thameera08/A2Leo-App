@@ -22,7 +22,7 @@ class MainCardV2 extends StatelessWidget {
       child: Hero(
         tag: title,
         child: SizedBox(
-          width: 380,
+          width: 390,
           height: 150,
           child: Card(
              color: AppColors.primary1,

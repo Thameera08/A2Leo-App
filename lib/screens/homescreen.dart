@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
@@ -50,12 +51,12 @@ class _HomescreenState extends State<Homescreen> {
                       DashboardItem(
                         title: "COUNCIL",
                         onTap: () {},
-                        icon: Icon(Icons.group),
+                        icon: Icon(CupertinoIcons.group),
                       ),
                       DashboardItem(
                         title: "CLUBS",
                         onTap: () {},
-                        icon: Icon(Icons.group),
+                        icon: Icon(CupertinoIcons.house_fill),
                       ),
                     ],
                   ),
@@ -65,7 +66,7 @@ class _HomescreenState extends State<Homescreen> {
                   child: MainCardV2(
                     title: "YEAR PLAN",
                     onTap: () {},
-                    icon: Icon(Icons.calendar_today),
+                    icon: Icon(CupertinoIcons.calendar),
                   ),
                 ),
                 Padding(
@@ -76,12 +77,12 @@ class _HomescreenState extends State<Homescreen> {
                       DashboardItem(
                         title: "LEO MAP",
                         onTap: () {},
-                        icon: Icon(Icons.group),
+                        icon: Icon(CupertinoIcons.map_fill),
                       ),
                       DashboardItem(
                         title: "REGIONS & ZONES",
                         onTap: () {},
-                        icon: Icon(Icons.group),
+                        icon: Icon(CupertinoIcons.location),
                       ),
                     ],
                   ),
