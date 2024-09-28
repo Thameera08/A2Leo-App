@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/council_card.dart';
+import 'package:leomd/sql/auth.dart';
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
 
@@ -14,6 +15,21 @@ class Council extends StatefulWidget {
 }
 
 class _CouncilState extends State<Council> {
+  List<Map<String, dynamic>> councilMembers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCouncilMembers();
+  }
+
+  void _loadCouncilMembers() async {
+    List<Map<String, dynamic>> members = await AuthHelper().getCouncilMembers();
+    setState(() {
+      councilMembers = members;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -54,7 +70,7 @@ class _CouncilState extends State<Council> {
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
+              colors: const [
                 AppColors.primary2,
                 AppColors.primary3,
               ],
@@ -74,27 +90,14 @@ class _CouncilState extends State<Council> {
                     crossAxisSpacing: 20.0,
                     mainAxisSpacing: 20.0,
                     padding: const EdgeInsets.all(16.0),
-                    children: <Widget>[
-                      CouncilCard(
-                        title: "Leo Thameera Dananjaya",
+                    children: councilMembers.map((member) {
+                      return CouncilCard(
+                        title: member['name'],
                         onTap: () {},
-                        icon: Icon(CupertinoIcons.profile_circled),
-                        position: 'Chief Couuncil Coordinator',
-                      ),
-                      CouncilCard(
-                        title: "Leo Thameera Dananjaya",
-                        onTap: () {},
-                        icon: Icon(CupertinoIcons.profile_circled),
-                        position: 'Zone Director - Zone A1',
-                      ),
-                      CouncilCard(
-                        title: "Leo Thameera Dananjaya",
-                        onTap: () {},
-                        icon: Icon(CupertinoIcons.profile_circled),
-                        position: 'Region Director - Region A',
-                      ),
-                      // Add more CouncilCards here
-                    ],
+                        icon: Image.asset(member['icon']), // You can map icons dynamically if needed
+                        position: member['position'],
+                      );
+                    }).toList(),
                   ),
                 ),
               ),

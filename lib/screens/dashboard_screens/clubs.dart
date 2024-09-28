@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/club_card.dart';
+import 'package:leomd/sql/auth.dart';
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
 
@@ -13,6 +15,21 @@ class Clubs extends StatefulWidget {
 }
 
 class _ClubsState extends State<Clubs> {
+  List<Map<String, dynamic>> clubDetails = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadclubDetails();
+  }
+
+  void _loadclubDetails() async {
+    List<Map<String, dynamic>> club = await AuthHelper().getClubDetails();
+    setState(() {
+      clubDetails = club;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -73,24 +90,14 @@ class _ClubsState extends State<Clubs> {
                     crossAxisSpacing: 20.0,
                     mainAxisSpacing: 20.0,
                     padding: const EdgeInsets.all(16.0),
-                    children: <Widget>[
-                      ClubCard(
-                        title: "Leo Club of University of Sri Jayawardanapura",
+                    children: clubDetails.map((club) {
+                      return ClubCard(
+                        title: club['club_name'],
                         onTap: () {},
-                        icon: Icon(Icons.group),
-                      ),
-                      ClubCard(
-                        title: "Leo Club of Sri Lanka Technological Campus",
-                        onTap: () {},
-                        icon: Icon(Icons.group),
-                      ),
-                      ClubCard(
-                        title: "Leo Club of Godigamuwa",
-                        onTap: () {},
-                        icon: Icon(Icons.group),
-                      ),
-                      // Add more ClubCards here
-                    ],
+                        icon: Icon(CupertinoIcons
+                            .group), // You can map icons dynamically if needed
+                      );
+                    }).toList(),
                   ),
                 ),
               ),

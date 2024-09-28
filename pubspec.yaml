@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   hexcolor: ^3.0.1
   flutter_animate: ^4.5.0
+  sqflite: ^2.3.3+2
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
