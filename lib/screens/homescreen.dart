@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
+import 'package:leomd/screens/dashboard_screens/clubs.dart';
 import 'package:leomd/themes/themes.dart';
 
 class Homescreen extends StatefulWidget {
@@ -55,7 +56,13 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                       DashboardItem(
                         title: "CLUBS",
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => Clubs(),
+                            ),
+                          );
+                        },
                         icon: Icon(CupertinoIcons.house_fill),
                       ),
                     ],
