@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:leomd/components/club_card.dart';
-import 'package:leomd/screens/homescreen.dart';
 import 'package:leomd/themes/themes.dart';
+import 'package:leomd/widgets/nav_bar.dart';
 
 class Clubs extends StatefulWidget {
   const Clubs({super.key});
@@ -19,7 +19,7 @@ class _ClubsState extends State<Clubs> {
       onWillPop: () async {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => Homescreen(),
+            builder: (context) => BottomNavBarExample(),
           ),
         );
         return true;
@@ -40,7 +40,7 @@ class _ClubsState extends State<Clubs> {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => Homescreen(),
+                  builder: (context) => BottomNavBarExample(),
                 ),
               );
             },

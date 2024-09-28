@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
 import 'package:leomd/screens/dashboard_screens/clubs.dart';
+import 'package:leomd/screens/dashboard_screens/council.dart';
 import 'package:leomd/themes/themes.dart';
 
 class Homescreen extends StatefulWidget {
@@ -51,8 +52,14 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       DashboardItem(
                         title: "COUNCIL",
-                        onTap: () {},
-                        icon: Icon(CupertinoIcons.group),
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => Council(),
+                            ),
+                          );
+                        },
+                        icon: Icon(CupertinoIcons.group_solid),
                       ),
                       DashboardItem(
                         title: "CLUBS",
@@ -89,7 +96,7 @@ class _HomescreenState extends State<Homescreen> {
                       DashboardItem(
                         title: "REGIONS & ZONES",
                         onTap: () {},
-                        icon: Icon(CupertinoIcons.location),
+                        icon: Icon(CupertinoIcons.location_circle_fill),
                       ),
                     ],
                   ),
