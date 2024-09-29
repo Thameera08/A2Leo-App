@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/club_card.dart';
+import 'package:leomd/screens/clubProfile/clubProfile.dart';
 import 'package:leomd/sql/auth.dart';
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
@@ -93,7 +94,17 @@ class _ClubsState extends State<Clubs> {
                     children: clubDetails.map((club) {
                       return ClubCard(
                         title: club['club_name'],
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => ClubProfile(
+                                clubName: club['club_name'],
+                                clubPresident: club['club_president'],
+                                clubRegion: club['club_region'],
+                              ),
+                            ),
+                          );
+                        },
                         icon: Icon(CupertinoIcons
                             .group), // You can map icons dynamically if needed
                       );
