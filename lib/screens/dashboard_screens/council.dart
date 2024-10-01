@@ -1,9 +1,7 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/council_card.dart';
-import 'package:leomd/sql/auth.dart';
+import 'package:leomd/auth/auth.dart'; // AuthHelper with Dio integration
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
 
@@ -16,6 +14,7 @@ class Council extends StatefulWidget {
 
 class _CouncilState extends State<Council> {
   List<Map<String, dynamic>> councilMembers = [];
+  bool isLoading = true; // Loading indicator state
 
   @override
   void initState() {
@@ -23,11 +22,21 @@ class _CouncilState extends State<Council> {
     _loadCouncilMembers();
   }
 
+  // Fetching council members using AuthHelper
   void _loadCouncilMembers() async {
-    List<Map<String, dynamic>> members = await AuthHelper().getCouncilMembers();
-    setState(() {
-      councilMembers = members;
-    });
+    try {
+      List<dynamic> members =
+          await AuthHelper().getCouncilMembers(); // Fetch from AuthHelper (Dio)
+      setState(() {
+        councilMembers = List<Map<String, dynamic>>.from(members);
+        isLoading = false; // Data loaded
+      });
+    } catch (e) {
+      print('Error fetching council members: $e');
+      setState(() {
+        isLoading = false; // In case of error
+      });
+    }
   }
 
   @override
@@ -81,26 +90,33 @@ class _CouncilState extends State<Council> {
           child: Column(
             children: [
               SizedBox(height: 20),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: GridView.count(
-                    childAspectRatio: 4.0,
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20.0,
-                    padding: const EdgeInsets.all(16.0),
-                    children: councilMembers.map((member) {
-                      return CouncilCard(
-                        title: member['name'],
-                        onTap: () {},
-                        icon: Image.asset(member['icon']), // You can map icons dynamically if needed
-                        position: member['position'],
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
+              isLoading
+                  ? Center(
+                      child:
+                          CircularProgressIndicator()) // Display a loading indicator while fetching data
+                  : Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GridView.count(
+                          childAspectRatio: 4.0,
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
+                          padding: const EdgeInsets.all(16.0),
+                          children: councilMembers.map((member) {
+                            return CouncilCard(
+                              title: member['name'],
+                              onTap: () {
+                                // You can add navigation or other actions here
+                              },
+                              icon: Image.asset(member['icon'] ??
+                                  'assets/default_icon.png'), // Fallback if icon is missing
+                              position: member['position'],
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),

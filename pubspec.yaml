@@ -39,6 +39,7 @@ dependencies:
   flutter_animate: ^4.5.0
   sqflite: ^2.3.3+2
   path: ^1.9.0
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:

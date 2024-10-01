@@ -3,8 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/club_card.dart';
+import 'package:leomd/models/clubsM.dart'; // Club model
 import 'package:leomd/screens/clubProfile/clubProfile.dart';
-import 'package:leomd/sql/auth.dart';
+import 'package:leomd/auth/auth.dart'; // AuthHelper with Dio integration
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
 
@@ -16,19 +17,30 @@ class Clubs extends StatefulWidget {
 }
 
 class _ClubsState extends State<Clubs> {
-  List<Map<String, dynamic>> clubDetails = [];
+  List<Club> clubDetails = []; // Using the Club model for storing club details
+  bool isLoading = true; // To handle the loading state
 
   @override
   void initState() {
     super.initState();
-    _loadclubDetails();
+    _loadClubDetails();
   }
 
-  void _loadclubDetails() async {
-    List<Map<String, dynamic>> club = await AuthHelper().getClubDetails();
-    setState(() {
-      clubDetails = club;
-    });
+  // Fetching the club details using AuthHelper
+  void _loadClubDetails() async {
+    try {
+      List<dynamic> clubs = await AuthHelper().getClubDetails(); // Use the AuthHelper class with Dio
+      setState(() {
+        // Convert dynamic data to a list of Club objects using the fromMap constructor
+        clubDetails = clubs.map((club) => Club.fromMap(club)).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Error fetching club details: $e');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -82,36 +94,37 @@ class _ClubsState extends State<Clubs> {
           child: Column(
             children: [
               SizedBox(height: 20),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: GridView.count(
-                    childAspectRatio: 4.0,
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20.0,
-                    padding: const EdgeInsets.all(16.0),
-                    children: clubDetails.map((club) {
-                      return ClubCard(
-                        title: club['club_name'],
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => ClubProfile(
-                                clubName: club['club_name'],
-                                clubPresident: club['club_president'],
-                                clubRegion: club['club_region'],
-                              ),
-                            ),
-                          );
-                        },
-                        icon: Icon(CupertinoIcons
-                            .group), // You can map icons dynamically if needed
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
+              isLoading
+                  ? Center(child: CircularProgressIndicator()) // Show a loader when fetching data
+                  : Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GridView.count(
+                          childAspectRatio: 4.0,
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
+                          padding: const EdgeInsets.all(16.0),
+                          children: clubDetails.map((club) {
+                            return ClubCard(
+                              title: club.clubName,
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => ClubProfile(
+                                      clubName: club.clubName,
+                                      clubPresident: club.clubPresidentName,
+                                      clubRegion: club.clubPresidentContact,
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: Icon(CupertinoIcons.group), // Static icon
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
