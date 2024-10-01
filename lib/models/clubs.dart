@@ -5,7 +5,7 @@ class Club {
   final String clubPresidentEmail;
   final String clubPresidentContact;
 
-  // Constructor to initialize a Club object
+  // Constructor
   Club({
     required this.id,
     required this.clubName,
@@ -15,18 +15,18 @@ class Club {
   });
 
   // Factory method to create a Club object from a JSON or Map
-  factory Club.fromMap(Map<String, dynamic> map) {
+  factory Club.fromJson(Map<String, dynamic> json) {
     return Club(
-      id: map['id'],
-      clubName: map['club_name'],
-      clubPresidentName: map['club_president_name'],
-      clubPresidentEmail: map['club_president_email'],
-      clubPresidentContact: map['club_president_contact'],
+      id: json['id'] ?? 0,
+      clubName: json['club_name'] ?? '',
+      clubPresidentName: json['club_president_name'] ?? '',
+      clubPresidentEmail: json['club_president_email'] ?? '',
+      clubPresidentContact: json['club_president_contact'] ?? '',
     );
   }
 
-  // Method to convert the Club object back into a Map (for serialization)
-  Map<String, dynamic> toMap() {
+  // Convert the Club object to JSON
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'club_name': clubName,
@@ -36,8 +36,9 @@ class Club {
     };
   }
 
+  // Method to print Club details in a readable format
   @override
   String toString() {
-    return 'Club{id: $id, clubName: $clubName, clubPresidentName: $clubPresidentName, clubPresidentEmail: $clubPresidentEmail, clubPresidentContact: $clubPresidentContact}';
+    return 'Club(id: $id, clubName: $clubName, clubPresidentName: $clubPresidentName, clubPresidentEmail: $clubPresidentEmail, clubPresidentContact: $clubPresidentContact)';
   }
 }

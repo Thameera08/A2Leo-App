@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/club_card.dart';
-import 'package:leomd/models/clubsM.dart'; // Club model
+import 'package:leomd/models/clubs.dart'; // Club model
 import 'package:leomd/screens/clubProfile/clubProfile.dart';
 import 'package:leomd/auth/auth.dart'; // AuthHelper with Dio integration
 import 'package:leomd/themes/themes.dart';
@@ -29,10 +29,12 @@ class _ClubsState extends State<Clubs> {
   // Fetching the club details using AuthHelper
   void _loadClubDetails() async {
     try {
-      List<dynamic> clubs = await AuthHelper().getClubDetails(); // Use the AuthHelper class with Dio
+      // Fetching the club details, which already returns a List<Club>
+      List<Club> clubs = await AuthHelper().getClubDetails();
+
       setState(() {
-        // Convert dynamic data to a list of Club objects using the fromMap constructor
-        clubDetails = clubs.map((club) => Club.fromMap(club)).toList();
+        // Directly assigning the fetched list of clubs to clubDetails
+        clubDetails = clubs;
         isLoading = false;
       });
     } catch (e) {
@@ -95,7 +97,9 @@ class _ClubsState extends State<Clubs> {
             children: [
               SizedBox(height: 20),
               isLoading
-                  ? Center(child: CircularProgressIndicator()) // Show a loader when fetching data
+                  ? Center(
+                      child:
+                          CircularProgressIndicator()) // Show a loader when fetching data
                   : Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),

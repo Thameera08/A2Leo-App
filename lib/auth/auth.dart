@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:leomd/models/clubs.dart';
 
 class AuthHelper {
   static final AuthHelper _instance = AuthHelper._internal();
@@ -8,13 +9,12 @@ class AuthHelper {
   AuthHelper._internal();
 
   // Base URL of the backend API
-  final String baseUrl =
-      'http://localhost:3000'; // Replace with your actual API base URL
+  final String baseUrl = 'http://10.0.2.2:3000/v1/api'; // Replace with your actual API base URL
 
   // Fetch council members from API
   Future<List<dynamic>> getCouncilMembers() async {
     try {
-      final response = await _dio.get('$baseUrl/council_members');
+      final response = await _dio.get('$baseUrl/district/council');
       if (response.statusCode == 200) {
         return response.data;
       } else {
@@ -27,13 +27,33 @@ class AuthHelper {
   }
 
   // Fetch club details from API
-  Future<List<dynamic>> getClubDetails() async {
+  Future<List<Club>> getClubDetails() async {
     try {
-      final response = await _dio.get('http://localhost:3000/v1/api/club/clubs');
+      final response = await _dio.get('$baseUrl/club/clubs'); // Updated to use baseUrl
+
       if (response.statusCode == 200) {
-        return response.data;
+        final data = response.data;
+
+        if (data != null && data['clubDetails'] != null) {
+          var clubDetails = data['clubDetails'];
+
+          // If clubDetails is a list, map each item to a Club object
+          if (clubDetails is List) {
+            return clubDetails.map((clubData) {
+              return Club.fromJson(clubData as Map<String, dynamic>);
+            }).toList();
+          } 
+          // If clubDetails is a single map, wrap it in a list
+          else if (clubDetails is Map<String, dynamic>) {
+            return [Club.fromJson(clubDetails)];
+          } else {
+            throw Exception('Unexpected format for club details');
+          }
+        } else {
+          throw Exception('No club details found');
+        }
       } else {
-        throw Exception('Failed to load club details');
+        throw Exception('Failed to load club details with status code: ${response.statusCode}');
       }
     } catch (e) {
       print('Error fetching club details: $e');
