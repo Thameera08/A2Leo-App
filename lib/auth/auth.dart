@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:leomd/models/clubs.dart';
+import 'package:leomd/models/councilM.dart';
 
 class AuthHelper {
   static final AuthHelper _instance = AuthHelper._internal();
@@ -12,19 +15,31 @@ class AuthHelper {
   final String baseUrl = 'http://10.0.2.2:3000/v1/api'; // Replace with your actual API base URL
 
   // Fetch council members from API
-  Future<List<dynamic>> getCouncilMembers() async {
-    try {
-      final response = await _dio.get('$baseUrl/district/council');
-      if (response.statusCode == 200) {
-        return response.data;
+Future<List<Council>> getCouncilMembers() async {
+  try {
+    final response = await _dio.get('$baseUrl/district/council');
+
+    if (response.statusCode == 200) {
+      // Assuming the API response has a 'councilDetails' field containing a list of council members
+      final data = response.data;
+
+      if (data != null && data['councilDetails'] != null) {
+        // Map the data to a List<Council>
+        return (data['councilDetails'] as List)
+            .map((councilData) => Council.fromJson(councilData as Map<String, dynamic>))
+            .toList();
       } else {
-        throw Exception('Failed to load council members');
+        throw Exception('No council details found');
       }
-    } catch (e) {
-      print('Error fetching council members: $e');
-      return [];
+    } else {
+      throw Exception('Failed to load council members with status code: ${response.statusCode}');
     }
+  } catch (e) {
+    print('Error fetching council members: $e');
+    return [];
   }
+}
+
 
   // Fetch club details from API
   Future<List<Club>> getClubDetails() async {

@@ -70,17 +70,17 @@ class _ClubProfileState extends State<ClubProfile> {
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            'Club President',
-            style: TextStyle(
+          Text(
+            widget.clubPresident,
+            style: const TextStyle(
               fontSize: 16,
             ),
           ),
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            'Club Region',
+           Text(
+            widget.clubRegion,
             style: TextStyle(
               fontSize: 16,
             ),

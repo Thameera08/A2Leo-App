@@ -1,19 +1,21 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leomd/components/council_card.dart';
 import 'package:leomd/auth/auth.dart'; // AuthHelper with Dio integration
+import 'package:leomd/models/councilM.dart';
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
 
-class Council extends StatefulWidget {
-  const Council({super.key});
+class CouncilScreen extends StatefulWidget { // Changed to CouncilScreen to avoid confusion with model name
+  const CouncilScreen({super.key});
 
   @override
-  State<Council> createState() => _CouncilState();
+  State<CouncilScreen> createState() => _CouncilScreenState();
 }
 
-class _CouncilState extends State<Council> {
-  List<Map<String, dynamic>> councilMembers = [];
+class _CouncilScreenState extends State<CouncilScreen> {
+  List<Council> councilMembers = []; // Using List<Council> to store council members
   bool isLoading = true; // Loading indicator state
 
   @override
@@ -25,10 +27,11 @@ class _CouncilState extends State<Council> {
   // Fetching council members using AuthHelper
   void _loadCouncilMembers() async {
     try {
-      List<dynamic> members =
-          await AuthHelper().getCouncilMembers(); // Fetch from AuthHelper (Dio)
+      // Fetch from AuthHelper (Dio) and ensure the result is List<Council>
+      List<Council> members = await AuthHelper().getCouncilMembers();
+      
       setState(() {
-        councilMembers = List<Map<String, dynamic>>.from(members);
+        councilMembers = members; // Assign the fetched data
         isLoading = false; // Data loaded
       });
     } catch (e) {
@@ -92,8 +95,8 @@ class _CouncilState extends State<Council> {
               SizedBox(height: 20),
               isLoading
                   ? Center(
-                      child:
-                          CircularProgressIndicator()) // Display a loading indicator while fetching data
+                      child: CircularProgressIndicator(),
+                    ) // Display a loading indicator while fetching data
                   : Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -105,13 +108,12 @@ class _CouncilState extends State<Council> {
                           padding: const EdgeInsets.all(16.0),
                           children: councilMembers.map((member) {
                             return CouncilCard(
-                              title: member['name'],
+                              title: member.name, // Use the Council model field
                               onTap: () {
                                 // You can add navigation or other actions here
                               },
-                              icon: Image.asset(member['icon'] ??
-                                  'assets/default_icon.png'), // Fallback if icon is missing
-                              position: member['position'],
+                              icon: Icon(CupertinoIcons.profile_circled), // Static icon (assuming council data has no icon)
+                              position: member.position, // Use position from Council model
                             );
                           }).toList(),
                         ),

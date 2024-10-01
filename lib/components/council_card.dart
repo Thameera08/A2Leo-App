@@ -6,7 +6,7 @@ import 'package:leomd/themes/themes.dart';
 
 class CouncilCard extends StatelessWidget {
   final String title;
-  final Image icon;
+  final Icon icon;
   final VoidCallback onTap;
   final String position;
 
@@ -37,8 +37,8 @@ class CouncilCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Image(image: icon.image,width: 80,height: 80,),
-                      SizedBox(width: 40),
+                      Icon(icon.icon, color: Colors.white , size: 50),
+                      SizedBox(width: 50),
                       Flexible(
                         // Allows text to wrap and take up available space
                         child: Text(
