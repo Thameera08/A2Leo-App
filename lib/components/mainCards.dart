@@ -6,13 +6,13 @@ import 'package:leomd/themes/themes.dart';
 
 class DashboardItem extends StatelessWidget {
   final String title;
-  final Icon icon;
+  final ImageProvider img;
   final VoidCallback onTap;
 
   DashboardItem({
     required this.title,
     required this.onTap,
-    required this.icon,
+    required this.img,
   });
 
   @override
@@ -26,7 +26,7 @@ class DashboardItem extends StatelessWidget {
           height: 150,
           child: Card(
             color: AppColors.white,
-            elevation: 8,
+            elevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
@@ -37,16 +37,17 @@ class DashboardItem extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                Icon(
-                  icon.icon,
-                  size: 50,
-                  color: AppColors.primary1,
+                Image(
+                  image: img,
+                  width: 100,
+                  height: 100,
                 ),
                 Text(
                   title,
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary1,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

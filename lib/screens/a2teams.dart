@@ -13,18 +13,8 @@ class _A2teamsState extends State<A2teams> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.primary2,
-              AppColors.primary3,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Center(
+      backgroundColor: AppColors.white,
+      body:  Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 50),
             child: Column(
@@ -37,16 +27,7 @@ class _A2teamsState extends State<A2teams> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      DashboardItem(
-                        title: "COUNCIL",
-                        onTap: () {},
-                        icon: Icon(Icons.group),
-                      ),
-                      DashboardItem(
-                        title: "CLUBS",
-                        onTap: () {},
-                        icon: Icon(Icons.group),
-                      ),
+                     
                     ],
                   ),
                 ),
@@ -54,7 +35,6 @@ class _A2teamsState extends State<A2teams> {
             ),
           ),
         ),
-      ),
     );
   }
 }
