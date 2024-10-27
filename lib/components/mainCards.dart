@@ -25,8 +25,8 @@ class DashboardItem extends StatelessWidget {
           width: 190,
           height: 150,
           child: Card(
-            color: AppColors.primary1,
-            elevation: 15,
+            color: AppColors.white,
+            elevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
@@ -40,13 +40,13 @@ class DashboardItem extends StatelessWidget {
                 Icon(
                   icon.icon,
                   size: 50,
-                  color: Colors.white,
+                  color: AppColors.primary1,
                 ),
                 Text(
                   title,
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white,
+                    color: AppColors.primary1,
                   ),
                 ),
               ],

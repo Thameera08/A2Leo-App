@@ -32,9 +32,45 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        title: const Text(
+          'LEO District 306 A2',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      actions: [
+        IconButton(
+          icon: Icon(Icons.notifications),
+          onPressed: () {},
+        ),
+      ],
+      elevation: 1,
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      floatingActionButton: SizedBox(
+        width: 70, // Set the width of the button
+        height: 70, // Set the height of the button
+        child: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              _selectedIndex =
+                  2; // Set this to show the desired screen on FAB press
+            });
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          backgroundColor: AppColors.primary4,
+          child: Icon(Icons.home, size: 30, color: Colors.white),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -43,41 +79,39 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
               Icons.group,
               size: 30,
             ),
-            label: 'MULTIPLE',
+            label: 'Multiple',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.map,
-              size: 40,
+              size: 30,
             ),
-            label: 'A2 TEAMS',
+            label: 'District Map',
+          ),
+          // Spacer item
+          BottomNavigationBarItem(
+            icon: SizedBox.shrink(), // An empty widget
+            label: '', // No label for spacing
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
-              size: 40,
+              Icons.people,
+              size: 30,
             ),
-            label: 'HOME',
+            label: 'Zones & Regions',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.info,
-              size: 40,
+              Icons.folder,
+              size: 30,
             ),
-            label: 'GENERAL',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.description,
-              size: 40,
-            ),
-            label: 'DOCS',
+            label: 'Documents',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: AppColors.primary4,
-        backgroundColor: AppColors.primary1,
         unselectedItemColor: AppColors.primary2,
+        backgroundColor: AppColors.white,
         onTap: _onItemTapped,
       ),
     );

@@ -6,7 +6,7 @@ import 'package:leomd/themes/themes.dart';
 
 class MainCardV2 extends StatelessWidget {
   final String title;
-  final Icon icon;
+  final IconData icon;
   final VoidCallback onTap;
 
   MainCardV2({
@@ -23,10 +23,10 @@ class MainCardV2 extends StatelessWidget {
         tag: title,
         child: SizedBox(
           width: 390,
-          height: 150,
+          height: 120,
           child: Card(
-             color: AppColors.primary1,
-            elevation: 15,
+             color: AppColors.white,
+            elevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
@@ -38,15 +38,15 @@ class MainCardV2 extends StatelessWidget {
                   height: 5,
                 ),
                 Icon(
-                  icon.icon,
+                  icon,
                   size: 50,
-                  color: Colors.white,
+                  color: AppColors.primary1,
                 ),
                 Text(
                   title,
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white,
+                    color: AppColors.primary1,
                   ),
                 ),
               ],
