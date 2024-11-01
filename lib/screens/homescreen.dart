@@ -123,7 +123,7 @@ class _HomescreenState extends State<Homescreen> {
               ),
               SizedBox(height: 20),
               MainCardV2(
-                  title: 'Year Plan', onTap: () {}, img: AssetImage('lib/images/yearplan.png'),),
+                  title: ' A2 Year Plan', onTap: () {}, img: AssetImage('lib/images/yearplan.png'),),
               SizedBox(height: 20),
             ],
           ),
