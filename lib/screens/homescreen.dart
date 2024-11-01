@@ -97,7 +97,7 @@ class _HomescreenState extends State<Homescreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     DashboardItem(
-                      title: "LEO MAP",
+                      title: "MD LEO MAP",
                       onTap: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
@@ -116,14 +116,17 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                         );
                       },
-                   img: AssetImage('lib/images/RZ.png'),
+                      img: AssetImage('lib/images/RZ.png'),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 20),
               MainCardV2(
-                  title: ' A2 Year Plan', onTap: () {}, img: AssetImage('lib/images/yearplan.png'),),
+                title: ' A2 Year Plan',
+                onTap: () {},
+                img: AssetImage('lib/images/yearplan.png'),
+              ),
               SizedBox(height: 20),
             ],
           ),
