@@ -7,7 +7,7 @@ class MainCardV2 extends StatelessWidget {
   final ImageProvider img;
   final VoidCallback onTap;
 
-  MainCardV2({
+  const MainCardV2({super.key, 
     required this.title,
     required this.onTap,
     required this.img,
