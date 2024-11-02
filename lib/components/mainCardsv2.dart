@@ -61,7 +61,7 @@ class MainCardV2 extends StatelessWidget {
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 22,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),

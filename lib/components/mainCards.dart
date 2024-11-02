@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -63,7 +63,7 @@ class DashboardItem extends StatelessWidget {
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
