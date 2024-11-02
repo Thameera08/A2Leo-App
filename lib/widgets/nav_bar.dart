@@ -48,7 +48,7 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.primary4,
           child: SvgPicture.asset(
             'lib/images/home.svg',
             width: 40,
@@ -62,17 +62,17 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.group,
+              Icons.people_alt_outlined,
               size: 30,
             ),
             label: 'Multiple',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.map,
+              Icons.people,
               size: 30,
             ),
-            label: 'District Map',
+            label: 'A2 Teams',
           ),
           // Spacer item
           BottomNavigationBarItem(
@@ -81,10 +81,10 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.people,
+              Icons.lightbulb,
               size: 30,
             ),
-            label: 'Zones & Regions',
+            label: 'General',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -96,8 +96,8 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: AppColors.primary4,
-        unselectedItemColor: AppColors.black,
-        backgroundColor: AppColors.white,
+        unselectedItemColor: AppColors.white,
+        backgroundColor: AppColors.primary1,
         onTap: _onItemTapped,
       ),
     );

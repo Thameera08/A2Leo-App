@@ -24,7 +24,7 @@ class MainCardV2 extends StatelessWidget {
           height: 150,
           child: Card(
             color: AppColors.white,
-            elevation: 2,
+            elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
@@ -44,7 +44,7 @@ class MainCardV2 extends StatelessWidget {
                       height: 150,
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                     ),
                   ],
