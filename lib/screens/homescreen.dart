@@ -66,7 +66,7 @@ class _HomescreenState extends State<Homescreen> {
                             child: Image.asset(
                               imagePath,
                               width: 350,
-                              fit: BoxFit.contain,
+                              fit: BoxFit.contain, 
                             ),
                           );
                         },
