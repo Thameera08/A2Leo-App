@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -26,28 +26,48 @@ class DashboardItem extends StatelessWidget {
           height: 150,
           child: Card(
             color: AppColors.white,
-            elevation: 2,
+            elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Stack(
+              alignment: Alignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: 5,
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image(
+                      image: img,
+                      width: 150,
+                      height: 150,
+                    ),
+                    Container(
+                      width: 190,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ],
                 ),
-                Image(
-                  image: img,
-                  width: 100,
-                  height: 100,
-                ),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary1,
-                    fontWeight: FontWeight.bold,
+                // Shadow background for text
+                Positioned(
+                  bottom: 40,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ],
