@@ -40,7 +40,7 @@ class _ClubProfileState extends State<ClubProfile> {
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => BottomNavBarExample(),
+                builder: (context) => FinalPage(),
               ),
             );
           },
