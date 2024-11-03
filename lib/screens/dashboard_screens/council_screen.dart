@@ -48,7 +48,7 @@ class _CouncilScreenState extends State<CouncilScreen> {
       onWillPop: () async {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => BottomNavBarExample(),
+            builder: (context) => FinalPage(),
           ),
         );
         return true;
@@ -69,7 +69,7 @@ class _CouncilScreenState extends State<CouncilScreen> {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => BottomNavBarExample(),
+                  builder: (context) => FinalPage(),
                 ),
               );
             },

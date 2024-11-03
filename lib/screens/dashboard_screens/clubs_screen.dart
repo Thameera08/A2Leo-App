@@ -51,7 +51,7 @@ class _ClubsState extends State<Clubs> {
       onWillPop: () async {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => BottomNavBarExample(),
+            builder: (context) => FinalPage(),
           ),
         );
         return true;
@@ -72,7 +72,7 @@ class _ClubsState extends State<Clubs> {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => BottomNavBarExample(),
+                  builder: (context) => FinalPage(),
                 ),
               );
             },

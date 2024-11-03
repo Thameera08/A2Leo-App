@@ -7,12 +7,12 @@ import 'package:leomd/screens/homescreen.dart';
 import 'package:leomd/screens/multiplescreen.dart';
 import 'package:leomd/themes/themes.dart';
 
-class BottomNavBarExample extends StatefulWidget {
+class FinalPage extends StatefulWidget {
   @override
-  _BottomNavBarExampleState createState() => _BottomNavBarExampleState();
+  _FinalPageState createState() => _FinalPageState();
 }
 
-class _BottomNavBarExampleState extends State<BottomNavBarExample> {
+class _FinalPageState extends State<FinalPage> {
   int _selectedIndex = 2;
 
   static final List<Widget> _widgetOptions = <Widget>[

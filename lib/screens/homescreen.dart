@@ -6,6 +6,7 @@ import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
 import 'package:leomd/screens/dashboard_screens/clubs_screen.dart';
 import 'package:leomd/screens/dashboard_screens/council_screen.dart';
+import 'package:leomd/screens/dashboard_screens/leomap.dart';
 import 'package:leomd/themes/themes.dart';
 
 class Homescreen extends StatefulWidget {
@@ -100,7 +101,7 @@ class _HomescreenState extends State<Homescreen> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => CouncilScreen(),
+                              builder: (context) => MapScreen(),
                             ),
                           );
                         },
