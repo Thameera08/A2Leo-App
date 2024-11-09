@@ -48,7 +48,7 @@ class _FinalPageState extends State<FinalPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          backgroundColor: AppColors.primary4,
+          backgroundColor: AppColors.white,
           child: SvgPicture.asset(
             'lib/images/home.svg',
             width: 40,
@@ -99,6 +99,10 @@ class _FinalPageState extends State<FinalPage> {
         unselectedItemColor: AppColors.white,
         backgroundColor: AppColors.primary1,
         onTap: _onItemTapped,
+        selectedLabelStyle: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
