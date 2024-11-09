@@ -17,13 +17,21 @@ class DashboardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use MediaQuery to get screen dimensions
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Adjust width and height based on screen size
+    final cardWidth = screenWidth * 0.45;  // 45% of screen width
+    final cardHeight = screenHeight * 0.22; // 22% of screen height
+
     return InkWell(
       onTap: onTap,
       child: Hero(
         tag: title,
         child: SizedBox(
-          width: 190,
-          height: 150,
+          width: cardWidth,
+          height: cardHeight,
           child: Card(
             color: AppColors.white,
             elevation: 10,
@@ -33,37 +41,38 @@ class DashboardItem extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image(
+                // Background image with overlay
+                Positioned.fill(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image(
                       image: img,
-                      width: 150,
-                      height: 150,
+                      fit: BoxFit.cover,
                     ),
-                    Container(
-                      width: 190,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-                // Shadow background for text
-                Positioned(
-                  bottom: 40,
+                // Semi-transparent overlay
+                Positioned.fill(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+                // Text background shadow and title
+                Positioned(
+                  bottom: cardHeight * 0.15,  // Adjust position based on height
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: cardWidth * 0.1,  // Font size based on width
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -72,7 +81,7 @@ class DashboardItem extends StatelessWidget {
                 ),
               ],
             ),
-          ).animate().fade().scale(),
+          ).animate().fade(duration: 400.ms).scale(duration: 300.ms).then(delay: 200.ms), // Animation chain for fade and scale
         ),
       ),
     );

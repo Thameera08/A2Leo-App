@@ -7,7 +7,8 @@ class MainCardV2 extends StatelessWidget {
   final ImageProvider img;
   final VoidCallback onTap;
 
-  const MainCardV2({super.key, 
+  const MainCardV2({
+    super.key,
     required this.title,
     required this.onTap,
     required this.img,
@@ -15,13 +16,23 @@ class MainCardV2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Responsive adjustments
+    final cardWidth = screenWidth * 0.9; // 90% of screen width
+    final cardHeight = screenHeight * 0.18; // 18% of screen height
+    final fontSize = cardWidth * 0.05; // Font size based on card width
+    final imageDimension = cardHeight * 1.1; // Image size based on card height
+
     return InkWell(
       onTap: onTap,
       child: Hero(
         tag: title,
         child: SizedBox(
-          width: 390,
-          height: 150,
+          width: cardWidth,
+          height: cardHeight,
           child: Card(
             color: AppColors.white,
             elevation: 10,
@@ -31,29 +42,32 @@ class MainCardV2 extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image(
+                // Background image with overlay
+                Positioned.fill(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image(
                       image: img,
-                      width: 160,
-                      height: 160,
+                      width: imageDimension,
+                      height: imageDimension,
+                      fit: BoxFit.cover,
                     ),
-                    Container(
-                      width: 390,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-                // Shadowed background for the title text
-                Positioned(
-                  bottom: 40,
+                // Semi-transparent overlay
+                Positioned.fill(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+                // Title text with shadow background
+                Positioned(
+                  bottom: cardHeight * 0.15,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(8),
@@ -61,7 +75,7 @@ class MainCardV2 extends StatelessWidget {
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: fontSize,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -70,7 +84,7 @@ class MainCardV2 extends StatelessWidget {
                 ),
               ],
             ),
-          ).animate().fade().scale(),
+          ).animate().fade(duration: 400.ms).scale(duration: 300.ms).then(delay: 200.ms),
         ),
       ),
     );
