@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
-import 'package:leomd/screens/homescreen.dart';
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
 
@@ -20,23 +21,32 @@ class _MapScreenState extends State<MapScreen> {
     'c2': 'lib/images/maps/c2.png',
   };
 
-  final String defaultMapImage =
-      'lib/images/maps/all.png'; // Default full map image
+  final String defaultMapImage = 'lib/images/maps/all.png'; // Default full map image
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsive adjustments
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Organize district keys into rows
+    List<List<String>> buttonRows = [];
+    for (int i = 0; i < districtImages.keys.length; i += 3) {
+      buttonRows.add(districtImages.keys.skip(i).take(3).toList());
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Leo District Maps',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: screenWidth * 0.05, // Responsive font size
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
@@ -46,43 +56,57 @@ class _MapScreenState extends State<MapScreen> {
           },
         ),
         centerTitle: true,
+        backgroundColor: Colors.white,
       ),
       body: Column(
         children: [
           // Display the selected district image or default map image
-          Image.asset(
-            width: 300,
-            _selectedDistrict != null
-                ? districtImages[_selectedDistrict]!
-                : defaultMapImage,
+          Padding(
+            padding: EdgeInsets.all(screenWidth * 0.05),
+            child: Image.asset(
+              _selectedDistrict != null
+                  ? districtImages[_selectedDistrict]!
+                  : defaultMapImage,
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.4,
+              fit: BoxFit.contain,
+            ),
           ),
-          // Row of buttons in a horizontal scrollable list
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: districtImages.keys.map((district) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedDistrict = district;
-                  });
-                },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  margin: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary1,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      district.toUpperCase(),
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+          SizedBox(height: screenHeight * 0.02),
+          // Display rows of district buttons
+          ...buttonRows.map(
+            (row) => Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: row.map((district) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedDistrict = district;
+                      });
+                    },
+                    child: Container(
+                      width: screenWidth * 0.15,
+                      height: screenWidth * 0.15,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary1,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          district.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: screenWidth * 0.045,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
+              ),
+            ),
           ),
         ],
       ),

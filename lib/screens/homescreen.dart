@@ -1,11 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
 import 'package:leomd/screens/dashboard_screens/clubs_screen.dart';
-import 'package:leomd/screens/dashboard_screens/council_screen.dart';
 import 'package:leomd/screens/dashboard_screens/leomap.dart';
 import 'package:leomd/themes/themes.dart';
 
@@ -25,6 +22,10 @@ class _HomescreenState extends State<Homescreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsive adjustments
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -32,14 +33,15 @@ class _HomescreenState extends State<Homescreen> {
           child: Center(
             child: Column(
               children: [
+                // Header with logo and icons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(left: screenWidth * 0.02),
                       child: Image.asset(
                         'lib/images/leoslogo.png',
-                        width: 120,
+                        width: screenWidth * 0.3,
                       ),
                     ),
                     Row(
@@ -56,8 +58,9 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ],
                 ),
+                // Carousel Slider
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(screenWidth * 0.02),
                   child: CarouselSlider(
                     items: _carouselImages.map((imagePath) {
                       return Builder(
@@ -66,15 +69,15 @@ class _HomescreenState extends State<Homescreen> {
                             borderRadius: BorderRadius.circular(30),
                             child: Image.asset(
                               imagePath,
-                              width: 350,
-                              fit: BoxFit.contain, 
+                              width: screenWidth * 0.9,
+                              fit: BoxFit.cover,
                             ),
                           );
                         },
                       );
                     }).toList(),
                     options: CarouselOptions(
-                      height: 200,
+                      height: screenHeight * 0.25,
                       autoPlay: true,
                       enlargeCenterPage: true,
                       aspectRatio: 16 / 9,
@@ -84,22 +87,24 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: screenHeight * 0.02),
+                // Main Card for District President Logo
                 MainCardV2(
                   title: 'District President Logo',
                   onTap: () {},
                   img: AssetImage('lib/images/dplogo.png'),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.03),
+                // Row of two Dashboard items
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DashboardItem(
                         title: "MD LEO MAP",
                         onTap: () {
-                          Navigator.of(context).pushReplacement(
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => MapScreen(),
                             ),
@@ -110,7 +115,7 @@ class _HomescreenState extends State<Homescreen> {
                       DashboardItem(
                         title: "REGION & ZONE",
                         onTap: () {
-                          Navigator.of(context).pushReplacement(
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => Clubs(),
                             ),
@@ -121,13 +126,14 @@ class _HomescreenState extends State<Homescreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.03),
+                // Main Card for A2 Year Plan
                 MainCardV2(
-                  title: ' A2 Year Plan',
+                  title: 'A2 Year Plan',
                   onTap: () {},
                   img: AssetImage('lib/images/yearplan.png'),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.03),
               ],
             ),
           ),
