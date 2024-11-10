@@ -22,7 +22,7 @@ class DashboardItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Adjust width and height based on screen size
-    final cardWidth = screenWidth * 0.45;  // 45% of screen width
+    final cardWidth = screenWidth * 0.45; // 45% of screen width
     final cardHeight = screenHeight * 0.22; // 22% of screen height
 
     return InkWell(
@@ -38,50 +38,73 @@ class DashboardItem extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                // Background image with overlay
-                Positioned.fill(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image(
-                      image: img,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: AppColors.primary1,
+                  width: 2,
                 ),
-                // Semi-transparent overlay
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  // Background image with overlay
+                  Positioned.fill(
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                ),
-                // Text background shadow and title
-                Positioned(
-                  bottom: cardHeight * 0.15,  // Adjust position based on height
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: cardWidth * 0.1,  // Font size based on width
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      child: Image(
+                        image: img,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  // Semi-transparent overlay
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ),
+                  // Text background shadow and title
+                  // Title text with shadow and stroke effect
+                  Positioned(
+                    bottom: cardHeight * 0.25,
+                    child: Stack(
+                      children: [
+                        // Stroke text (border)
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: cardWidth * 0.1,
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 3
+                              ..color = Colors.black,
+                          ),
+                        ),
+                        // Main text (foreground)
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: cardWidth * 0.1,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              )
+                  .animate()
+                  .fade(duration: 400.ms)
+                  .scale(duration: 300.ms)
+                  .then(delay: 200.ms), // Animation chain for fade and scale
             ),
-          ).animate().fade(duration: 400.ms).scale(duration: 300.ms).then(delay: 200.ms), // Animation chain for fade and scale
+          ),
         ),
       ),
     );

@@ -39,52 +39,74 @@ class MainCardV2 extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                // Background image with overlay
-                Positioned.fill(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image(
-                      image: img,
-                      width: imageDimension,
-                      height: imageDimension,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: AppColors.primary1,
+                  width: 2,
                 ),
-                // Semi-transparent overlay
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  // Background image with overlay
+                  Positioned.fill(
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                ),
-                // Title text with shadow background
-                Positioned(
-                  bottom: cardHeight * 0.15,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: fontSize,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      child: Image(
+                        image: img,
+                        width: imageDimension,
+                        height: imageDimension,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  // Semi-transparent overlay
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ),
+                  // Title text with shadow background
+                  Positioned(
+                    bottom: cardHeight * 0.25,
+                    child: Stack(
+                      children: [
+                        // Stroke text (border)
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: fontSize,
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 3
+                              ..color = Colors.black,
+                          ),
+                        ),
+                        // Main text (foreground)
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: fontSize,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ).animate().fade(duration: 400.ms).scale(duration: 300.ms).then(delay: 200.ms),
+          )
+              .animate()
+              .fade(duration: 400.ms)
+              .scale(duration: 300.ms)
+              .then(delay: 200.ms),
         ),
       ),
     );
