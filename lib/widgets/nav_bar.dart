@@ -81,10 +81,10 @@ class _FinalPageState extends State<FinalPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.lightbulb,
+              Icons.person_2_rounded,
               size: 30,
             ),
-            label: 'General',
+            label: 'Clubs',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -95,9 +95,9 @@ class _FinalPageState extends State<FinalPage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primary4,
-        unselectedItemColor: AppColors.white,
-        backgroundColor: AppColors.primary1,
+        selectedItemColor: AppColors.black,
+        unselectedItemColor: AppColors.grey,
+        backgroundColor: AppColors.white,
         onTap: _onItemTapped,
         selectedLabelStyle: TextStyle(
           fontSize: 12,
