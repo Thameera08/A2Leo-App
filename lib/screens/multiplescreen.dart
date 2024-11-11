@@ -24,7 +24,7 @@ class _MultipleState extends State<Multiple> {
           'Leo Multiple',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),

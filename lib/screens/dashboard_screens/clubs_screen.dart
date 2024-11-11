@@ -95,40 +95,7 @@ class _ClubsState extends State<Clubs> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 20),
-              isLoading
-                  ? Center(
-                      child:
-                          CircularProgressIndicator()) // Show a loader when fetching data
-                  : Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: GridView.count(
-                          childAspectRatio: 4.0,
-                          crossAxisCount: 1,
-                          crossAxisSpacing: 20.0,
-                          mainAxisSpacing: 20.0,
-                          padding: const EdgeInsets.all(16.0),
-                          children: clubDetails.map((club) {
-                            return ClubCard(
-                              title: club.clubName,
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => ClubProfile(
-                                      clubName: club.clubName,
-                                      clubPresident: club.clubPresidentName,
-                                      clubRegion: club.clubPresidentContact,
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: Icon(CupertinoIcons.group), // Static icon
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+             
             ],
           ),
         ),

@@ -16,10 +16,11 @@ class _A2teamsState extends State<A2teams> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.primary1,
         title: Text(
           "A2 Leaders",
           style: TextStyle(
-              color: AppColors.black,
+              color: AppColors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold),
         ),
