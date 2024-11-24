@@ -14,7 +14,6 @@ class _MultipleState extends State<Multiple> {
   @override
   Widget build(BuildContext context) {
     // Screen width for responsive adjustments
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColors.white,

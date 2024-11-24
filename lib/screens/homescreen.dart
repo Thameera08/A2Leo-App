@@ -122,7 +122,7 @@ class _HomescreenState extends State<Homescreen> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => Clubs(),
+                                builder: (context) => RandD(),
                               ),
                             );
                           },
