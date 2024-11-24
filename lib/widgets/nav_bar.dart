@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:leomd/screens/a2teams.dart';
 import 'package:leomd/screens/homescreen.dart';
+import 'package:leomd/screens/leoclubs.dart';
 import 'package:leomd/screens/multiplescreen.dart';
 import 'package:leomd/themes/themes.dart';
 
@@ -19,8 +20,7 @@ class _FinalPageState extends State<FinalPage> {
     Multiple(),
     A2teams(),
     Homescreen(),
-    Text('General',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+    LeoClubs(),
     Text('Docs', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
   ];
 
@@ -72,7 +72,7 @@ class _FinalPageState extends State<FinalPage> {
               Icons.people,
               size: 30,
             ),
-            label: 'A2 Teams',
+            label: 'A2 Leders',
           ),
           // Spacer item
           BottomNavigationBarItem(

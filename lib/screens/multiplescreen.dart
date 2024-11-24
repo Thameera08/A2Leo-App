@@ -14,7 +14,6 @@ class _MultipleState extends State<Multiple> {
   @override
   Widget build(BuildContext context) {
     // Screen width for responsive adjustments
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -24,7 +23,7 @@ class _MultipleState extends State<Multiple> {
           'Leo Multiple',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),

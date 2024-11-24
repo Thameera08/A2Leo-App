@@ -40,13 +40,13 @@ class _MapScreenState extends State<MapScreen> {
         title: Text(
           'Leo District Maps',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: screenWidth * 0.05, // Responsive font size
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
@@ -56,7 +56,7 @@ class _MapScreenState extends State<MapScreen> {
           },
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.primary1,
       ),
       body: Column(
         children: [

@@ -88,7 +88,7 @@ class _HomescreenState extends State<Homescreen> {
               Expanded(
                 flex: 2,
                 child: MainCardV2(
-                  title: 'District President Logo',
+                  title: 'District Presidents Logo',
                   onTap: () {},
                   img: AssetImage('lib/images/dplogo.png'),
                 ),
@@ -104,7 +104,7 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       Expanded(
                         child: DashboardItem(
-                          title: "MD LEO MAP",
+                          title: "Leo MD Map",
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -118,11 +118,11 @@ class _HomescreenState extends State<Homescreen> {
                       SizedBox(width: screenWidth * 0.03),
                       Expanded(
                         child: DashboardItem(
-                          title: "REGION & ZONE",
+                          title: "Regions & Zones",
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => Clubs(),
+                                builder: (context) => RandD(),
                               ),
                             );
                           },

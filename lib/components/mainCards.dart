@@ -73,24 +73,12 @@ class DashboardItem extends StatelessWidget {
                     bottom: cardHeight * 0.25,
                     child: Stack(
                       children: [
-                        // Stroke text (border)
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: cardWidth * 0.1,
-                            fontWeight: FontWeight.bold,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
-                              ..color = Colors.black,
-                          ),
-                        ),
                         // Main text (foreground)
                         Text(
                           title,
                           style: TextStyle(
                             fontSize: cardWidth * 0.1,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
