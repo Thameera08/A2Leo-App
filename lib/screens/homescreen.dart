@@ -88,7 +88,7 @@ class _HomescreenState extends State<Homescreen> {
               Expanded(
                 flex: 2,
                 child: MainCardV2(
-                  title: 'District Presidents Logo',
+                  title: "District President's Logo",
                   onTap: () {},
                   img: AssetImage('lib/images/dplogo.png'),
                 ),
