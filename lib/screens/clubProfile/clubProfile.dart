@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:leomd/themes/themes.dart';
 import 'package:leomd/widgets/nav_bar.dart';
