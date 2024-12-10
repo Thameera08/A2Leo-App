@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:leomd/screens/dashboard_screens/controllers/yearplan.dart';
 import 'package:leomd/themes/themes.dart';
 
-
-
 class YearPlanPage extends StatelessWidget {
+  const YearPlanPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final YearPlanController controller = Get.put(YearPlanController());
