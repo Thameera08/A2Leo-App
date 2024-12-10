@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
-import 'package:leomd/screens/dashboard_screens/clubs_screen.dart';
-import 'package:leomd/screens/dashboard_screens/leomap.dart';
+import 'package:leomd/screens/dashboard_screens/screens/r&d/region&zones.dart';
+import 'package:leomd/screens/dashboard_screens/screens/map/leomap.dart';
 import 'package:leomd/themes/themes.dart';
 
-class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+class Homescreen extends StatelessWidget {
+  Homescreen({super.key});
 
-  @override
-  State<Homescreen> createState() => _HomescreenState();
-}
-
-class _HomescreenState extends State<Homescreen> {
-  final List<String> _carouselImages = [
+  // Example carousel images
+  final List<String> carouselImages = [
     'lib/images/c1.jpg',
     'lib/images/c2.jpg',
     'lib/images/c3.jpg',
@@ -22,7 +19,6 @@ class _HomescreenState extends State<Homescreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width and height for responsive adjustments
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -47,19 +43,49 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.notifications),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.snackbar(
+                            'Notifications',
+                            'No new notifications!',
+                            snackPosition: SnackPosition.TOP,
+                          );
+                        },
                       ),
                       IconButton(
                         icon: Icon(Icons.menu),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.bottomSheet(
+                            Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    title: Text('Option 1'),
+                                    onTap: () {},
+                                  ),
+                                  ListTile(
+                                    title: Text('Option 2'),
+                                    onTap: () {},
+                                  ),
+                                  ListTile(
+                                    title: Text('Close'),
+                                    onTap: () => Get.back(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ],
               ),
-              // Carousel Slider with limited height
+              // Carousel Slider
               CarouselSlider(
-                items: _carouselImages.map((imagePath) {
+                items: carouselImages.map((imagePath) {
                   return Builder(
                     builder: (BuildContext context) {
                       return ClipRRect(
@@ -89,7 +115,9 @@ class _HomescreenState extends State<Homescreen> {
                 flex: 2,
                 child: MainCardV2(
                   title: "District President's Logo",
-                  onTap: () {},
+                  onTap: () {
+                    Get.snackbar('District Logo', 'Action for District Logo');
+                  },
                   img: AssetImage('lib/images/dplogo.png'),
                 ),
               ),
@@ -106,11 +134,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: DashboardItem(
                           title: "Leo MD Map",
                           onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MapScreen(),
-                              ),
-                            );
+                            Get.to(() => MapScreen());
                           },
                           img: AssetImage('lib/images/leomap.png'),
                         ),
@@ -120,11 +144,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: DashboardItem(
                           title: "Regions & Zones",
                           onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => RandD(),
-                              ),
-                            );
+                            Get.to(() => RandD());
                           },
                           img: AssetImage('lib/images/RZ.png'),
                         ),
@@ -139,7 +159,9 @@ class _HomescreenState extends State<Homescreen> {
                 flex: 2,
                 child: MainCardV2(
                   title: 'A2 Year Plan',
-                  onTap: () {},
+                  onTap: () {
+                    Get.snackbar('A2 Year Plan', 'Action for A2 Year Plan');
+                  },
                   img: AssetImage('lib/images/yearplan.png'),
                 ),
               ),

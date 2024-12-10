@@ -42,6 +42,7 @@ dependencies:
   dio: ^5.7.0
   carousel_slider: ^5.0.0
   flutter_svg: ^2.0.10+1
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
