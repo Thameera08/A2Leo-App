@@ -1,50 +1,58 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:leomd/screens/a2teams.dart';
+import 'package:get/get.dart';
+import 'package:leomd/screens/dashboard_screens/screens/a2teams/a2teams.dart';
 import 'package:leomd/screens/homescreen.dart';
-import 'package:leomd/screens/leoclubs.dart';
-import 'package:leomd/screens/multiplescreen.dart';
+import 'package:leomd/screens/dashboard_screens/screens/clubs/leoclubs.dart';
+import 'package:leomd/screens/dashboard_screens/screens/mutiple/multiplescreen.dart';
 import 'package:leomd/themes/themes.dart';
 
-class FinalPage extends StatefulWidget {
-  @override
-  _FinalPageState createState() => _FinalPageState();
-}
+class FinalPageController extends GetxController {
+  // Observable index for the selected tab
+  var selectedIndex = 2.obs;
 
-class _FinalPageState extends State<FinalPage> {
-  int _selectedIndex = 2;
-
-  static final List<Widget> _widgetOptions = <Widget>[
+  // List of widgets for the tabs
+  final List<Widget> widgetOptions = [
     Multiple(),
     A2teams(),
     Homescreen(),
     LeoClubs(),
-    Text('Docs', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+    Center(
+      child: Text(
+        'Docs',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+    ),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  // Method to update the selected tab
+  void onItemTapped(int index) {
+    selectedIndex.value = index;
   }
+
+  // Method to reset to the home screen
+  void resetToHome() {
+    selectedIndex.value = 2;
+  }
+}
+
+class FinalPage extends StatelessWidget {
+  FinalPage({Key? key}) : super(key: key);
+
+  final FinalPageController controller = Get.put(FinalPageController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child:
+            Obx(() => controller.widgetOptions[controller.selectedIndex.value]),
       ),
       floatingActionButton: SizedBox(
-        width: 70, // Set the width of the button
-        height: 70, // Set the height of the button
+        width: 70,
+        height: 70,
         child: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _selectedIndex = 2;
-            });
-          },
+          onPressed: () => controller.resetToHome(),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -57,51 +65,40 @@ class _FinalPageState extends State<FinalPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people_alt_outlined,
-              size: 30,
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people_alt_outlined, size: 30),
+              label: 'Multiple',
             ),
-            label: 'Multiple',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people, size: 30),
+              label: 'A2 Leaders',
             ),
-            label: 'A2 Leders',
-          ),
-          // Spacer item
-          BottomNavigationBarItem(
-            icon: SizedBox.shrink(), // An empty widget
-            label: '', // No label for spacing
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_2_rounded,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: SizedBox.shrink(), // Spacer item
+              label: '',
             ),
-            label: 'Clubs',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.folder,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_2_rounded, size: 30),
+              label: 'Clubs',
             ),
-            label: 'Documents',
+            BottomNavigationBarItem(
+              icon: Icon(Icons.folder, size: 30),
+              label: 'Documents',
+            ),
+          ],
+          currentIndex: controller.selectedIndex.value,
+          selectedItemColor: AppColors.black,
+          unselectedItemColor: AppColors.grey,
+          backgroundColor: AppColors.white,
+          onTap: controller.onItemTapped,
+          selectedLabelStyle: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
           ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.black,
-        unselectedItemColor: AppColors.grey,
-        backgroundColor: AppColors.white,
-        onTap: _onItemTapped,
-        selectedLabelStyle: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
         ),
       ),
     );
