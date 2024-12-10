@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use, file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:leomd/components/zone_card.dart';
 import 'package:leomd/screens/dashboard_screens/controllers/region&zone.dart';
+import 'package:leomd/themes/themes.dart';
 
 class RandD extends StatelessWidget {
   RandD({super.key});
@@ -17,7 +19,9 @@ class RandD extends StatelessWidget {
         return true;
       },
       child: Scaffold(
+        backgroundColor: AppColors.white,
         appBar: AppBar(
+          backgroundColor: AppColors.white,
           title: Text(
             "A2 Region & Zones",
             style: TextStyle(
@@ -39,8 +43,19 @@ class RandD extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            // Add any other widgets here as needed
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.itemCount.value,
+                  itemBuilder: (context, index) {
+                    return ZoneCard(
+                      title: 'Zone A${index + 1}',
+                      imageUrl: AssetImage('lib/images/dplogo.png'),
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

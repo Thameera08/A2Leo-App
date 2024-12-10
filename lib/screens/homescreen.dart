@@ -3,8 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
+import 'package:leomd/screens/dashboard_screens/screens/dplogo/dplogo.dart';
 import 'package:leomd/screens/dashboard_screens/screens/r&d/region&zones.dart';
 import 'package:leomd/screens/dashboard_screens/screens/map/leomap.dart';
+import 'package:leomd/screens/dashboard_screens/screens/yearplan/yearplan.dart';
 import 'package:leomd/themes/themes.dart';
 
 class Homescreen extends StatelessWidget {
@@ -116,7 +118,7 @@ class Homescreen extends StatelessWidget {
                 child: MainCardV2(
                   title: "District President's Logo",
                   onTap: () {
-                    Get.snackbar('District Logo', 'Action for District Logo');
+                    Get.to(() => DPLogoPage());
                   },
                   img: AssetImage('lib/images/dplogo.png'),
                 ),
@@ -160,7 +162,7 @@ class Homescreen extends StatelessWidget {
                 child: MainCardV2(
                   title: 'A2 Year Plan',
                   onTap: () {
-                    Get.snackbar('A2 Year Plan', 'Action for A2 Year Plan');
+                    Get.off(() => YearPlanPage());
                   },
                   img: AssetImage('lib/images/yearplan.png'),
                 ),
