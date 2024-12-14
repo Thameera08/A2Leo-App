@@ -22,8 +22,8 @@ class DashboardItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Adjust width and height based on screen size
-    final cardWidth = screenWidth * 0.45; // 45% of screen width
-    final cardHeight = screenHeight * 0.22; // 22% of screen height
+    final cardWidth = screenWidth * 0.38; // 45% of screen width
+    final cardHeight = screenHeight * 0.23; // 22% of screen height
 
     return InkWell(
       onTap: onTap,
@@ -34,64 +34,38 @@ class DashboardItem extends StatelessWidget {
           height: cardHeight,
           child: Card(
             color: AppColors.white,
-            elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                  color: AppColors.primary1,
-                  width: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Image
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image(
+                    image: img,
+                    width: cardWidth * 0.6, // Scale image width
+                    // height: cardHeight * 0.5, // Scale image height
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  // Background image with overlay
-                  Positioned.fill(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Image(
-                        image: img,
-                      ),
-                    ),
+                SizedBox(height: cardHeight * 0.08), // Spacer
+                // Title text
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: cardWidth * 0.1,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  // Semi-transparent overlay
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ),
-                  // Text background shadow and title
-                  // Title text with shadow and stroke effect
-                  Positioned(
-                    bottom: cardHeight * 0.25,
-                    child: Stack(
-                      children: [
-                        // Main text (foreground)
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: cardWidth * 0.1,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-                  .animate()
-                  .fade(duration: 400.ms)
-                  .scale(duration: 300.ms)
-                  .then(delay: 200.ms), // Animation chain for fade and scale
-            ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ).animate()
+                .fade(duration: 400.ms)
+                .scale(duration: 300.ms)
+                .then(delay: 200.ms), // Animation chain for fade and scale
           ),
         ),
       ),

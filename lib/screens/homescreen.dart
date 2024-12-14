@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:leomd/components/mainCards.dart';
 import 'package:leomd/components/mainCardsv2.dart';
@@ -10,14 +9,9 @@ import 'package:leomd/screens/dashboard_screens/screens/yearplan/yearplan.dart';
 import 'package:leomd/themes/themes.dart';
 
 class Homescreen extends StatelessWidget {
-  Homescreen({super.key});
+   Homescreen({super.key});
 
-  // Example carousel images
-  final List<String> carouselImages = [
-    'lib/images/c1.jpg',
-    'lib/images/c2.jpg',
-    'lib/images/c3.jpg',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,32 +79,7 @@ class Homescreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // Carousel Slider
-              CarouselSlider(
-                items: carouselImages.map((imagePath) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.asset(
-                          imagePath,
-                          width: screenWidth * 0.9,
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-                options: CarouselOptions(
-                  height: screenHeight * 0.22,
-                  autoPlay: true,
-                  enlargeCenterPage: true,
-                  aspectRatio: 16 / 9,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                ),
-              ),
+     
               SizedBox(height: screenHeight * 0.02),
               // Main Card for District President Logo
               Expanded(
@@ -138,7 +107,7 @@ class Homescreen extends StatelessWidget {
                           onTap: () {
                             Get.to(() => MapScreen());
                           },
-                          img: AssetImage('lib/images/leomap.png'),
+                          img: AssetImage('lib/images/map.png'),
                         ),
                       ),
                       SizedBox(width: screenWidth * 0.03),
@@ -164,7 +133,7 @@ class Homescreen extends StatelessWidget {
                   onTap: () {
                     Get.off(() => YearPlanPage());
                   },
-                  img: AssetImage('lib/images/yearplan.png'),
+                  img: AssetImage('lib/images/calender.png'),
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),

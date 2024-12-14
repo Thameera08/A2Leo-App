@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:leomd/themes/themes.dart';
@@ -7,8 +9,7 @@ class MainCardV2 extends StatelessWidget {
   final ImageProvider img;
   final VoidCallback onTap;
 
-  const MainCardV2({
-    super.key,
+  MainCardV2({
     required this.title,
     required this.onTap,
     required this.img,
@@ -16,85 +17,55 @@ class MainCardV2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width and height
+    // Use MediaQuery to get screen dimensions
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    // Responsive adjustments
-    final cardWidth = screenWidth * 0.9; // 90% of screen width
-    final cardHeight = screenHeight * 0.18; // 18% of screen height
-    final fontSize = cardWidth * 0.05; // Font size based on card width
-    final imageDimension = cardHeight * 1.1; // Image size based on card height
+    // Adjust width and height based on screen size
+    final cardWidth = screenWidth * 0.45; // 45% of screen width
+    final cardHeight = screenHeight * 0.22; // 22% of screen height
 
     return InkWell(
       onTap: onTap,
       child: Hero(
         tag: title,
         child: SizedBox(
-          width: cardWidth,
+          width: 420,
           height: cardHeight,
           child: Card(
             color: AppColors.white,
-            elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                  color: AppColors.primary1,
-                  width: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Image
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image(
+                    image: img,
+                    width: cardWidth * 0.7, // Scale image width
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  // Background image with overlay
-                  Positioned.fill(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Image(
-                        image: img,
-                        width: imageDimension,
-                        height: imageDimension,
-                      ),
-                    ),
+                SizedBox(height: cardHeight * 0.05), // Spacer
+                // Title text
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: cardWidth * 0.1,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  // Semi-transparent overlay
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ),
-                  // Title text with shadow background
-                  Positioned(
-                    bottom: cardHeight * 0.25,
-                    child: Stack(
-                      children: [
-                        // Main text (foreground)
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: fontSize,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-              .animate()
-              .fade(duration: 400.ms)
-              .scale(duration: 300.ms)
-              .then(delay: 200.ms),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ).animate()
+                .fade(duration: 400.ms)
+                .scale(duration: 300.ms)
+                .then(delay: 200.ms), // Animation chain for fade and scale
+          ),
         ),
       ),
     );

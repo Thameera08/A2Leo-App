@@ -3,17 +3,17 @@ import 'package:get/get.dart';
 class MultipleController extends GetxController {
   // Observable list of dashboard items
   final RxList<Map<String, String>> dashboardItems = <Map<String, String>>[
-    {"title": "A1", "imgPath": "lib/images/leomap.png"},
-    {"title": "A2", "imgPath": "lib/images/leomap.png"},
-    {"title": "A1", "imgPath": "lib/images/leomap.png"},
-    {"title": "A2", "imgPath": "lib/images/leomap.png"},
-    {"title": "A1", "imgPath": "lib/images/leomap.png"},
+    {"title": "A1 District", "imgPath": "lib/images/a1.jpg"},
+    {"title": "B1 District", "imgPath": "lib/images/b1.png"},
+    {"title": "B2 District", "imgPath": "lib/images/b2.png"},
+    {"title": "C1 District", "imgPath": "lib/images/c1.jpg"},
+    {"title": "C2 District", "imgPath": "lib/images/c2.png"},
   ].obs;
 
   // Main card data
   final RxMap<String, String> mainCard = {
-    "title": "LEO MULTIPLE",
-    "imgPath": "lib/images/leomap.png",
+    "title": "LEO MULTIPLE 306",
+    "imgPath": "lib/images/mdlogo.png",
   }.obs;
 
   // Action when a dashboard item is tapped
