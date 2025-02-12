@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:leomd/components/mainCards.dart';
@@ -9,7 +11,7 @@ import 'package:leomd/screens/dashboard_screens/screens/yearplan/yearplan.dart';
 import 'package:leomd/themes/themes.dart';
 
 class Homescreen extends StatelessWidget {
-   Homescreen({super.key});
+   const Homescreen({super.key});
 
 
 
