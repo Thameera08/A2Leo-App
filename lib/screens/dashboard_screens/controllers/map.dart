@@ -12,6 +12,15 @@ class MapController extends GetxController {
     'c1': 'lib/images/maps/c1.png',
     'c2': 'lib/images/maps/c2.png',
   };
+  
+  final Map districtNames = {
+    'a1': 'Leo District 306 A1',
+    'a2': 'Leo District 306 A2',
+    'b1': 'Leo District 306 B1',
+    'b2': 'Leo District 306 B2',
+    'c1': 'Leo District 306 C1',
+    'c2': 'Leo District 306 C2',
+  };
 
   final String defaultMapImage = 'lib/images/maps/all.png'; // Default image
 
@@ -24,5 +33,9 @@ class MapController extends GetxController {
     return selectedDistrict.value != null
         ? districtImages[selectedDistrict.value]!
         : defaultMapImage;
+  }
+
+  String getSelectedDistrict() {
+    return selectedDistrict.value ?? 'all';
   }
 }

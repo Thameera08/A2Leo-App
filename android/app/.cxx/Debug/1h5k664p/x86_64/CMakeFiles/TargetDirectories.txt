@@ -1,0 +1,2 @@
+/home/Botson/Leo MD/leomd/android/app/.cxx/Debug/1h5k664p/x86_64/CMakeFiles/edit_cache.dir
+/home/Botson/Leo MD/leomd/android/app/.cxx/Debug/1h5k664p/x86_64/CMakeFiles/rebuild_cache.dir
