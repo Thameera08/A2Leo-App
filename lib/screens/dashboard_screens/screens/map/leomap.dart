@@ -17,6 +17,7 @@ class MapScreen extends StatelessWidget {
     // Organize district keys into rows
     List<List<String>> buttonRows = [];
     final districts = controller.districtImages.keys.toList();
+    final districtsnames = controller.districtNames.keys.toList();
     for (int i = 0; i < districts.length; i += 3) {
       buttonRows.add(districts.skip(i).take(3).toList());
     }
@@ -47,6 +48,17 @@ class MapScreen extends StatelessWidget {
                 fit: BoxFit.contain,
               );
             }),
+          ),
+          SizedBox(height: screenHeight * 0.02),
+          Obx(
+            () => Text(
+              controller.districtNames[controller.getSelectedDistrict()] ??
+                  'All',
+              style: TextStyle(
+                fontSize: screenWidth * 0.05,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           SizedBox(height: screenHeight * 0.02),
           // Display rows of district buttons
